@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: application-b
+  labels:
+    app: application-b
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: application-b
+  template:
+    metadata:
+      labels:
+        app: application-b
+    spec:
+      containers:
+        - name: application-b
+          image: ghcr.io/thepartly/gitscale-demo/application-b
+          ports:
+            - name: http
+              containerPort: 8080
+          envFrom:
+            - configMapRef:
+                name: application-b
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: http
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: http

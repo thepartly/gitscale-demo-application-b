@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: application-b
+spec:
+  selector:
+    app: application-b
+  ports:
+    - name: http
+      port: 8080
+      targetPort: http
