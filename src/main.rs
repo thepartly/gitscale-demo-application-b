@@ -14,6 +14,8 @@ struct HelloQuery {
 #[derive(Serialize)]
 struct Hello {
     message: String,
+    /// Which service answered.
+    service: &'static str,
 }
 
 fn message(name: &str) -> String {
@@ -24,6 +26,7 @@ async fn hello(Query(query): Query<HelloQuery>) -> Json<Hello> {
     let name = query.name.unwrap_or_else(|| "world".to_string());
     Json(Hello {
         message: message(&name),
+        service: "application-b",
     })
 }
 

@@ -1,6 +1,8 @@
 /** What `GET /api/b/hello` answers. */
 export interface Hello {
   message: string;
+  /** Which service answered. */
+  service: string;
 }
 
 /**
